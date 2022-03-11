@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+    db:
+        container_name: maria-db
+        image: mariadb:latest
+        ports:
+            - 3306:3306
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: 1234
+            MARIADB_DATABASE: concurrency
+            TZ: Asia/Seoul
+        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
