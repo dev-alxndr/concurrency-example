@@ -12,6 +12,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 @SpringBootApplication
 @RequiredArgsConstructor
 public class ConcurrencyExampleApplication implements ApplicationRunner {
@@ -32,6 +36,5 @@ public class ConcurrencyExampleApplication implements ApplicationRunner {
         memberRepository.save(Member.createMember("USER"));
         couponRepository.save(Coupon.createCoupon("COUPON", 3));
 
-//        couponService.downloadCoupon();
     }
 }

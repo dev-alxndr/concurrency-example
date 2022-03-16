@@ -1,17 +1,24 @@
 package com.example.concurrencyexample.service;
 
 import com.example.concurrencyexample.entity.Coupon;
+import com.example.concurrencyexample.entity.Member;
 import com.example.concurrencyexample.entity.MemberCoupon;
+import com.example.concurrencyexample.repository.CouponRepository;
 import com.example.concurrencyexample.repository.MemberCouponRepository;
+import com.example.concurrencyexample.repository.MemberRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.task.TaskExecutorCustomizer;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author : Alexander Choi
@@ -26,8 +33,9 @@ class CouponServiceTest {
     @Autowired
     private MemberCouponRepository memberCouponRepository;
 
-
     @Test
+    @Transactional
+    @Rollback(false)
     public void 쿠폰_다운로드() throws Exception {
 
         try {
@@ -46,11 +54,9 @@ class CouponServiceTest {
             latch.await();
 
             List<MemberCoupon> memberCoupons = memberCouponRepository.findByMember_idAndCoupon_id(1L, 1L);
-            assertEquals(memberCoupons.size(), 1);
-
-
+            assertEquals(memberCoupons.size(), 3);
         } catch (RuntimeException re) {
-            re.getStackTrace();
+            re.printStackTrace();
         }
     }
 }
