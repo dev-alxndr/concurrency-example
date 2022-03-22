@@ -27,3 +27,7 @@ public interface MemberCouponRepository extends JpaRepository<MemberCoupon, Long
 
 ### 
 - ConcurrencyExampleApplication 에서 앱이 실행될 때 사용자 하나와 쿠폰 하나를 기본으로 생성해줍니다.
+
+
+| h2도 `for update`를 지원한다고 되어있으나 왜인지 정상작동을 하지 않음   
+| https://www.h2database.com/html/commands.html#select

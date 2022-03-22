@@ -1,12 +1,7 @@
 package com.example.concurrencyexample.service;
 
-import com.example.concurrencyexample.entity.Coupon;
-import com.example.concurrencyexample.entity.Member;
 import com.example.concurrencyexample.entity.MemberCoupon;
-import com.example.concurrencyexample.repository.CouponRepository;
 import com.example.concurrencyexample.repository.MemberCouponRepository;
-import com.example.concurrencyexample.repository.MemberRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -53,7 +48,7 @@ class CouponServiceTest {
 
             latch.await();
 
-            List<MemberCoupon> memberCoupons = memberCouponRepository.findByMember_idAndCoupon_id(1L, 1L);
+            List<MemberCoupon> memberCoupons = memberCouponRepository.findByMemberIdAndCouponId(1L, 1L);
             assertEquals(memberCoupons.size(), 3);
         } catch (RuntimeException re) {
             re.printStackTrace();

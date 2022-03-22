@@ -9,7 +9,6 @@ import com.example.concurrencyexample.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -40,7 +39,7 @@ public class CouponService {
         Coupon coupon = optCoupon.orElseThrow(() -> new IllegalArgumentException("NOT EXISTS COUPON"));
         Integer limitOf = coupon.getLimitOf();
 
-        List<MemberCoupon> memberCoupons = memberCouponRepository.findByMember_idAndCoupon_id(member.getId(), coupon.getId());
+        List<MemberCoupon> memberCoupons = memberCouponRepository.findByMemberIdAndCouponId(member.getId(), coupon.getId());
 
         String threadName = Thread.currentThread().getName();
         log.info("{} / coupon size = {}", threadName, memberCoupons.size());

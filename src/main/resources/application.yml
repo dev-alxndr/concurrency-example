@@ -1,21 +1,4 @@
 spring:
-  datasource:
-    url: jdbc:mariadb://localhost:3306/concurrency
-    username: root
-    password: 1234
-    driver-class-name: org.mariadb.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: create
-    open-in-view: false
-    properties:
-      hibernate:
-        default_batch_fetch_size: 500
-        #        show_sql: true # System.out.println() ?? ??? ??? ??? ?? logging ?? ??
-        format_sql: true
-        use_sql_comments: false
+  profiles:
+    active: h2
 
-logging:
-  level:
-    org.hibernate.SQL: debug
-    org.springframework.transaction.interceptor: trace
